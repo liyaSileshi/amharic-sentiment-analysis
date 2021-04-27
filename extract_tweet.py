@@ -14,7 +14,6 @@ def auth():
   """returns the BEARER TOKEN to access tweets based on id"""
   return os.environ.get("BEARER_TOKEN")
 
-
 def create_url(ids):
     # ids = "ids=1213764224356421633,1255542774432063488"
     # You can adjust ids to include a single Tweets.
@@ -22,25 +21,16 @@ def create_url(ids):
     url = "https://api.twitter.com/2/tweets?ids={}".format(ids)
     return url
 
-
 def create_headers(bearer_token):
     headers = {"Authorization": "Bearer {}".format(bearer_token)}
     return headers
 
-
 def connect_to_endpoint(url, headers):
     response = requests.request("GET", url, headers=headers)
-    print(response.status_code)
-    
     response_json_keys = response.json().keys()
     # if status code is 200 or json returned an error
     if response.status_code != 200 or "errors" in response_json_keys:
       return None #if there url tweet id is invalid
-        # raise Exception(
-        #     "Request returned an error: {} {}".format(
-        #         response.status_code, response.text
-        #     )
-        # )
     return response.json()
 
 def main():
@@ -52,7 +42,6 @@ def main():
 
 def nullify_tweet_col(df):
     df['tweet'] = None
-    # print(df)
     return df
 
 def test_extract():
@@ -61,39 +50,22 @@ def test_extract():
   df = nullify_tweet_col(df_test)
 
   #loop over df
-  for i in range(2):
-    # print(df['tweet_id'][i])
-    ids = df_test['tweet_id'][i]
-    # print(ids)
+  for i in range(6):
+    ids = df['tweet_id'][i]
     url = create_url(ids)
     
     headers = create_headers(bearer_token)
     json_response = connect_to_endpoint(url, headers)
-    print(json_response)
-    # print(json.dumps(json_response, indent=4, sort_keys=True))
 
+    #if json response is not None
+    if json_response is not None:
+      #get the text
+      text = json_response['data'][0]['text']
+      print(text)
+      #append the text to the df 
+      df['tweet'][i] = text
 
-
-
-
-  # print(len(df_test))
-  # for i in range(len(df_test)):
-  #   print(df_test['tweet_id'][i])
-
-  # ids = df_test['tweet_id'][0]
-  # url = create_url(ids)
-  # headers = create_headers(bearer_token)
-  # json_response = connect_to_endpoint(url, headers)
-  # print(json.dumps(json_response, indent=4, sort_keys=True))
-  #loop over df test and get id
-  #create url
-  #extract tweet
-  #append tweet for the column
-
-  # url = create_url(id)
-  # headers = create_headers(bearer_token)
-  # json_response = connect_to_endpoint(url, headers)
-  # print(json.dumps(json_response, indent=4, sort_keys=True))
+  print(df.head())
 
 if __name__ == "__main__":
     # main()
