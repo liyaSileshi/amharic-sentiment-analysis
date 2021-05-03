@@ -108,11 +108,11 @@ def sleep(timeout, retry=1):
   return the_real_decorator
 
 def main():
-   #get train data
-    # df_train = pd.read_csv('./dataset/train.csv')
-    # df = extract(df_train)
-    # filename = 'train.csv'
-    # write_to_file(df, filename)
+  #get train data
+  df_train = pd.read_csv('./dataset/train.csv')
+  df = extract(df_train)
+  filename = 'train.csv'
+  write_to_file(df, filename)
 
   #get test data
   # df_test = pd.read_csv('./dataset/test.csv')
@@ -121,10 +121,10 @@ def main():
   # write_to_file(df, filename)
 
   #get dev data
-  df_dev = pd.read_csv('./dataset/dev.csv')
-  df = extract(df_dev)
-  filename = 'dev.csv'
-  write_to_file(df, filename)
+  # df_dev = pd.read_csv('./dataset/dev.csv')
+  # df = extract(df_dev)
+  # filename = 'dev.csv'
+  # write_to_file(df, filename)
 
 if __name__ == "__main__":
   main()
