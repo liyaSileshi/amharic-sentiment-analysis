@@ -108,6 +108,22 @@ However, there are many languages out there that are difficult to do sentiment a
 
 Amharic is one of the low-resource languages. Because of the scarcity of labeled data, it's been quite difficult to make an NLP model for sentiment analysis. However, recent researchers and Data Scientists are using platforms such as Telegram bots to label already existing Amharic tweets by asking users whether they are Positive, Negative or Neutral. Using this data, they were able to build models to classify Amharic tweets. But even then, it is quite difficult sometimes to classify a tweet since it's hard to tell sarcasm in tweets and their data collection didn't account for that.
 
+# Explanation and results
+
+The 4 models I used for my sentiment analysis was Naive Bayes with Count Vectorizer, Naive Bayes model with TFIDF vectorizer, Text blob sentiment, and SVM. 
+Both the Naive Bayes had an accuracy of ~21%, but when the Mixed sentiments were removed from the datasets, the accuracy increased to ~32%. 
+The text blob sentiment model has an accuracy of ~45.9%. A lot higher than the Naive Bayes model. 
+The last working model I currently have is the SVM model. It has an accuracy of 50.7% with mixed sentiments removed. The model further improves to 70% when the classification is binary (positive/ negative). This shows that the model performs well when the dataset is composed of only 2 classifications. 
+
+# Describe the implementation process, including assumptions, pitfalls, problems solved, what worked, what didn’t work.
+
+After getting a dataset that contained tweet_id and sentiments, I wrote a script file to extract the tweets for each tweet_id using the twitter API. 
+Once I got the dataset, I started cleaning the data and made it ready to implement different models to it. The extracting and cleaning part was difficult because there were a lot of edge cases that I had to make sure I didn't miss. The data extraction by itself took few days since twitter didn't allow morethan 150 requests per 15 minutes and there was around 9,000 tweet_ids to extract tweet.
+
+I was able to contact some of the researchers that were working on amharic sentiment analysis and was able to join in their collaboration. I will be able to use their embedding models as well, and their pre-trained models. Once I have access to those, I can continue in making deep-learning models and make a more accurate sentiment model. 
+
+What I learned is that the most difficult part of NLP is the data extraction and data cleaning than creating the actual models.
+
 # Implementation Plan
 
 - [ ]  Exploration of the tweet datasets of ASAB
@@ -117,9 +133,12 @@ Amharic is one of the low-resource languages. Because of the scarcity of labeled
 - [ ]  Work on improving it's accuracy
 - [ ]  Built different types of NLP models and compare their accuracies for the given data
 
+
 # Resources
 
 [https://linguaphiles.livejournal.com/716083.html](https://linguaphiles.livejournal.com/716083.html)
+
+[ASAB github](https://github.com/uhh-lt/ASAB)
 
 [https://www.findke.ovgu.de/findke/en/Research/Data+Sets/Contemporary+Amharic+Corpus+(CACO)-p-1142.html](https://www.findke.ovgu.de/findke/en/Research/Data+Sets/Contemporary+Amharic+Corpus+%28CACO%29-p-1142.html)
 
