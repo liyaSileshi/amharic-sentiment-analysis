@@ -133,6 +133,9 @@ What I learned is that the most difficult part of NLP is the data extraction and
 - [ ]  Work on improving it's accuracy
 - [ ]  Built different types of NLP models and compare their accuracies for the given data
 
+# How to run the code
+
+You can run EDA, models and preprocess part from the colab notebooks. Which are located in their designated folders. Description is also on the readmes of the folders.
 
 # Resources
 
